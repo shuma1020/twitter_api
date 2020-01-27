@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2020_01_27_060009) do
 
-  create_table "posts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "posts", force: :cascade do |t|
     t.text "content"
     t.string "picture"
     t.string "hash_tag"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_01_27_060009) do
     t.string "kind"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
     t.string "nickname"
