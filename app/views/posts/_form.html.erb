@@ -24,7 +24,10 @@
     <p>画像内の文字入力</p>
     <%= form.text_area :content, class:'form-control', rows:"3" %>
   </div>
-
+  <div>
+    <%= form.label :tag_list, 'タグをカンマ区切りで入力' %>
+    <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
+  </div>
   <div class="actions">
     <%= form.submit "Tweetする（まだツイートされません）", id: 'submit', class:"btn btn-outline-primary" %>
   </div>
