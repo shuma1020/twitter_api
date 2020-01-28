@@ -161,7 +161,7 @@ class PostsController < ApplicationController
       # ⑨-5 文字色の指定
       color = "white"
       # ⑨-6 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
-      draw = "text 30,0 '#{content}'"
+      draw = "text 0,160 '#{content}'"
       # ⑨-7 フォントの指定
       font = ".fonts/GenEiGothicN-U-KL.otf"
       # ⑨-8 ↑これらの項目も文字サイズのように背景画像や文字数によって変えることができます
