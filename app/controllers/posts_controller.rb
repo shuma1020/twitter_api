@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :confirm]
+  before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:show, :new]
 
   # GET /posts
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_path, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,7 +67,8 @@ class PostsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
-      @post = Post.find(params[:id])
+      p "sddd"
+      p @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
