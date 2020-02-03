@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :posts
   # トップページにアクセスした際に postコントローラのnewアクションを呼び出す設定
 
-  root 'posts#new'
+  root 'homes#index'
   get '/homes', to: 'homes#index'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/login', to: 'posts#login'
+  get '/login', to: 'homes#login'
 end

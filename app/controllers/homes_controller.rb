@@ -4,7 +4,6 @@ class HomesController < ApplicationController
       redirect_to action:'login'
     else
       @user = User.find(session[:user_id])
-      p "kkkkk"
     end
   end
 
