@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:show, :new]
+  before_action :login, only: [:index, :show, :new]
+  before_action :set_user
 
   # GET /posts
   # GET /posts.json
@@ -64,7 +66,19 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def login
+      if session[:user_id].nil?
+        redirect_to action:'login'
+      else
+        @user = User.find(session[:user_id])
+      end
+    end
+
+    def set_user
+      @user = User.find(session[:user_id])
+    end
+
     def set_post
       @post = Post.find(params[:id])
     end
