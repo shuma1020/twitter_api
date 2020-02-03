@@ -1,13 +1,15 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:show, :new]
-  before_action :login, only: [:index, :show, :new]
   before_action :set_user
+  before_action :login, only: [:index, :show, :new]
+  before_action :correct_user, only: [:edit, :update, :confirm, :destroy]
 
-  # GET /posts
-  # GET /posts.json
+  def login
+  end
+
   def index
-    @posts = Post.all
+    @posts = @user.posts.all
   end
 
   # GET /posts/1
@@ -27,7 +29,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = @user.posts.new(post_params)
     if Post.last.present?
       next_id = Post.last.id + 1
     else
@@ -61,7 +63,6 @@ class PostsController < ApplicationController
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_path, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -75,6 +76,15 @@ class PostsController < ApplicationController
       end
     end
 
+
+    def correct_user
+      user = User.find(session[:user_id])
+      post = Post.find(params[:id])
+      unless user == post.user_id
+        render new
+      end
+    end
+
     def set_user
       @user = User.find(session[:user_id])
     end
@@ -85,7 +95,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :picture,:title, :kind,:tag_list)
+      params.require(:post).permit(:content, :picture,:title, :kind,:tag_list, :desire)
     end
 
     def new_post

@@ -9,5 +9,5 @@ Rails.application.routes.draw do
   get '/homes', to: 'homes#index'
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
-  get '/login', to: 'homes#login'
+  get '/login', to: 'posts#login'
 end

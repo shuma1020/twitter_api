@@ -3,6 +3,10 @@
 <%=image_tag(@post.picture, size: '400x250') %>
 
 
+<% if @user.id == @post.user_id %>
+  <%= link_to '編集する', edit_post_path(@post) %> |
+  <%= link_to '一覧画面に戻る', posts_path %>
+<% else %>
+  <%=render "shared/error"%>
+<% end %>
 
-<%= link_to '編集する', edit_post_path(@post) %> |
-<%= link_to '一覧画面に戻る', posts_path %>
