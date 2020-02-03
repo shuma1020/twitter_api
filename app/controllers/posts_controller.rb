@@ -80,50 +80,10 @@ class PostsController < ApplicationController
     end
 
     def make_picture(id)
-      main = ""
-      # ⑨-1 改行を消去
-      title = @post.title.gsub(/\r\n|\r|\n/," ")
-      # ⑨-2 titleの文字数に応じて条件分岐
-      if title.length <= 28 then
-        # ⑨-3 28文字以下の場合は7文字毎に改行
-        n = (title.length / 7).floor + 1
-        n.times do |i|
-          s_num = i * 7
-          f_num = s_num + 6
-          range =  Range.new(s_num,f_num)
-          main += title.slice(range)
-          main += "\n" if n != i+1
-        end
-        # ⑨-4 文字サイズの指定
-        pointsize = 90
-      elsif title.length <= 50 then
-        n = (title.length / 10).floor + 1
-        n.times do |i|
-          s_num = i * 10
-          f_num = s_num + 9
-          range =  Range.new(s_num,f_num)
-          main += title.slice(range)
-          main += "\n" if n != i+1
-        end
-        pointsize = 60
-      else
-        n = (title.length / 15).floor + 1
-        n.times do |i|
-          s_num = i * 15
-          f_num = s_num + 14
-          range =  Range.new(s_num,f_num)
-          main += title.slice(range)
-          main += "\n" if n != i+1
-        end
-        pointsize = 45
-      end
-      main = "text 15,15 '#{main}'"
-      # ⑨-5 文字色の指定
-
-
       sentense = ""
       # ⑨-1 改行を消去
       content = @post.content.gsub(/\r\n|\r|\n/," ")
+      title = @post.title.gsub(/\r\n|\r|\n/," ")
       # ⑨-2 contentの文字数に応じて条件分岐
       if content.length <= 28 then
         # ⑨-3 28文字以下の場合は7文字毎に改行
@@ -181,9 +141,15 @@ class PostsController < ApplicationController
         i.gravity 'center'
         i.pointsize pointsize
         i.draw draw
-        i.draw main
       end
 
+      image.combine_options do |i|
+        i.font font
+        i.fill 'yellow'
+        i.gravity 'south'
+        i.pointsize 50
+        i.draw "text 0,0 '#{title}'"
+      end
 
 
 
