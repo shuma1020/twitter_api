@@ -1,4 +1,3 @@
-<h2>Step 1</h2>
 
 <%= form_with(model: post, local: true) do |form| %>
   <% if post.errors.any? %>
@@ -12,23 +11,26 @@
     </div>
   <% end %>
 
-  <div class="form-group">
-    <p>背景画像選択</p>
-    <!-- 背景画像はラジオボタンで選択形式 -->
-    <label><%= form.radio_button :kind, "black" %><%= image_tag 'black.jpg', width: '100' %></label>
-    <label><%= form.radio_button :kind, "red" %><%= image_tag 'black.jpg', width: '100' %></label>
-  </div>
 
-  <div>
-    <h2>Step 2</h2>
-  </div>
+
 
   <div class="form-group">
-    <p>画像内の文字入力</p>
+    <p>1.タイトルを好きに入力してみよう(例：エンジニアになりたい。エンジニアとして実務経験3年以上あり！）</p>
+    <%= form.text_area :title, class:'form-control', rows:"3" %>
+  </div>
+  <div class="form-group">
+    <p>2.あなたの特徴を好きに書いてみよう(例：スキル、資格、タイプ、性格)</p>
     <%= form.text_area :content, class:'form-control', rows:"3" %>
   </div>
-
+  <div class="form-group">
+    <p>3.あなたの求める条件を好きに書いてみよう(例：給与、待遇、働き方)</p>
+    <%= form.text_area :desire, class:'form-control', rows:"3" %>
+  </div>
+  <div>
+    <%= form.label :tag_list, 'タグをカンマ区切りで入力してみよう' %>
+    <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
+  </div>
   <div class="actions">
-    <%= form.submit "画像を確認する（まだツイートされません）", id: 'submit', class:"square_btn" %>
+    <%= form.submit "Tweetする（まだツイートされません）", id: 'submit', class:"btn btn-outline-primary" %>
   </div>
 <% end %>

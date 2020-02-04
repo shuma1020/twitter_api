@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: twitter_api_production
-  username: twitter_api
+  username: shuma
   password: <%= ENV['TWITTER_API_DATABASE_PASSWORD'] %>

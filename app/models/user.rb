@@ -14,4 +14,5 @@ class User < ApplicationRecord
       user.description = description
     end
   end
+  has_many :posts
 end

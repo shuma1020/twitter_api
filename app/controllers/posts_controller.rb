@@ -1,18 +1,21 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :confirm]
+  before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:show, :new]
+  before_action :set_user, only: [:new, :create, :index, :show, :edit, :destroy, :update]
+  before_action :login, only: [:index, :show, :new]
+  before_action :correct_user, only: [:edit, :update, :confirm, :destroy]
 
-  # GET /posts
-  # GET /posts.json
+  def login
+  end
+
   def index
-    @posts = Post.all
+    @posts = @user.posts.all
   end
 
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post.id = params[:id]
-    render :new
+    @post = Post.find(params[:id])
   end
 
   # GET /posts/new
@@ -26,7 +29,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = @user.posts.new(post_params)
     if Post.last.present?
       next_id = Post.last.id + 1
     else
@@ -59,20 +62,40 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to posts_path, notice: 'Post was successfully destroyed.' }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def login
+      if session[:user_id].nil?
+        redirect_to action:'login'
+      else
+        @user = User.find(session[:user_id])
+      end
+    end
+
+
+    def correct_user
+      user = User.find(session[:user_id])
+      post = Post.find(params[:id])
+      unless user == post.user_id
+        render new
+      end
+    end
+
+    def set_user
+      @user = User.find(session[:user_id])
+    end
+
     def set_post
       @post = Post.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :picture, :hash)
+      params.require(:post).permit(:content, :picture,:title, :kind,:tag_list, :desire)
     end
 
     def new_post
@@ -83,6 +106,7 @@ class PostsController < ApplicationController
       sentense = ""
       # ⑨-1 改行を消去
       content = @post.content.gsub(/\r\n|\r|\n/," ")
+      title = @post.title.gsub(/\r\n|\r|\n/," ")
       # ⑨-2 contentの文字数に応じて条件分岐
       if content.length <= 28 then
         # ⑨-3 28文字以下の場合は7文字毎に改行
@@ -120,7 +144,7 @@ class PostsController < ApplicationController
       # ⑨-5 文字色の指定
       color = "white"
       # ⑨-6 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
-      draw = "text 0,0 '#{sentense}'"
+      draw = "text 0,160 '#{content}'"
       # ⑨-7 フォントの指定
       font = ".fonts/GenEiGothicN-U-KL.otf"
       # ⑨-8 ↑これらの項目も文字サイズのように背景画像や文字数によって変えることができます
@@ -141,6 +165,19 @@ class PostsController < ApplicationController
         i.pointsize pointsize
         i.draw draw
       end
+
+      image.combine_options do |i|
+        i.font font
+        i.fill 'yellow'
+        i.gravity 'south'
+        i.pointsize 50
+        i.draw "text 0,0 '#{title}'"
+      end
+
+
+
+
+
       # ⑨-12 保存先のストレージの指定。Amazon S3を指定する。
       storage = Fog::Storage.new(
         provider: 'AWS',
