@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:show, :new]
-
+  before_action :set_user
   before_action :login, only: [:index, :show, :new]
   before_action :correct_user, only: [:edit, :update, :confirm, :destroy]
 
