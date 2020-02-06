@@ -82,7 +82,7 @@ class PostsController < ApplicationController
       user = User.find(session[:user_id])
       post = Post.find(params[:id])
       unless user.id == post.user_id
-        render new
+        redirect_to root_path
       end
     end
 
