@@ -31,3 +31,21 @@
     margin-bottom: 0;
   }
 }
+.confirm{
+  position: relative;
+  .image_created{
+    text-align: center;
+    img{
+      margin-top: 44px;
+    }
+  }
+  .button{
+    position: absolute;
+    top: 20px;
+    left: 700px;
+      .btn-primary{
+      margin-top: 24px;
+      margin-bottom: 12px;
+      }
+  }
+}
