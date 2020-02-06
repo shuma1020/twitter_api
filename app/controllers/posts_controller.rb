@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     if @post.update(post_params)
-      make_picture(@post.id)
+      p make_picture(@post.id)
       redirect_to confirm_path(@post)
     else
       render :edit
@@ -80,7 +80,7 @@ class PostsController < ApplicationController
     def correct_user
       user = User.find(session[:user_id])
       post = Post.find(params[:id])
-      unless user == post.user_id
+      unless user.id == post.user_id
         render new
       end
     end
@@ -148,7 +148,7 @@ class PostsController < ApplicationController
       # ⑨-6 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
       draw = "text 0,160 '#{content}'"
       # ⑨-7 フォントの指定
-      font = ".fonts/GenEiGothicN-U-KL.otf"
+      font = "app/.fonts/GenEiGothicN-U-KL.otf"
       # ⑨-8 ↑これらの項目も文字サイズのように背景画像や文字数によって変えることができます
       # ⑨-9 選択された背景画像の設定
       case @post.kind
