@@ -36,6 +36,7 @@ class PostsController < ApplicationController
       next_id = 1
     end
     make_picture(next_id)
+    @post
     if @post.save
       redirect_to confirm_path(@post)
     else
@@ -47,7 +48,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1.json
   def update
     if @post.update(post_params)
-      p make_picture(@post.id)
+      make_picture(@post.id)
       redirect_to confirm_path(@post)
     else
       render :edit
@@ -109,6 +110,7 @@ class PostsController < ApplicationController
       # ⑨-1 改行を消去
       content = @post.content.gsub(/\r\n|\r|\n/," ")
       title = @post.title.gsub(/\r\n|\r|\n/," ")
+      desire = @post.desire.gsub(/\r\n|\r|\n/," ")
       # ⑨-2 contentの文字数に応じて条件分岐
       if content.length <= 28 then
         # ⑨-3 28文字以下の場合は7文字毎に改行
@@ -121,7 +123,7 @@ class PostsController < ApplicationController
           sentense += "\n" if n != i+1
         end
         # ⑨-4 文字サイズの指定
-        pointsize = 90
+        pointsize = 50
       elsif content.length <= 50 then
         n = (content.length / 10).floor + 1
         n.times do |i|
@@ -146,9 +148,9 @@ class PostsController < ApplicationController
       # ⑨-5 文字色の指定
       color = "white"
       # ⑨-6 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
-      draw = "text 0,160 '#{content}'"
+      draw = "text 0,0 '#{content}'"
       # ⑨-7 フォントの指定
-      font = "app/.fonts/GenEiGothicN-U-KL.otf"
+      font = Rails.root.join('app').join('.fonts').join("GenEiGothicN-U-KL.otf")
       # ⑨-8 ↑これらの項目も文字サイズのように背景画像や文字数によって変えることができます
       # ⑨-9 選択された背景画像の設定
       case @post.kind
@@ -156,7 +158,7 @@ class PostsController < ApplicationController
         base = "app/assets/images/black.jpg"
       # ⑨-10 今回は選択されていない場合は"red"となるようにしている
       else
-        base = "app/assets/images/red.jpg"
+        base = Rails.root.join("app").join("assets").join("images").join("red.jpg")
       end
       # ⑨-11 minimagickを使って選択した画像を開き、作成した文字を指定した条件通りに挿入している
       image = MiniMagick::Image.open(base)
@@ -168,12 +170,21 @@ class PostsController < ApplicationController
         i.draw draw
       end
 
+
       image.combine_options do |i|
         i.font font
-        i.fill 'yellow'
+        i.fill 'white'
+        i.gravity 'south'
+        i.pointsize 90
+        i.draw "text 0,480 '#{title}'"
+      end
+
+      image.combine_options do |i|
+        i.font font
+        i.fill 'white'
         i.gravity 'south'
         i.pointsize 50
-        i.draw "text 0,0 '#{title}'"
+        i.draw "text 0,200 '#{desire}'"
       end
 
 
