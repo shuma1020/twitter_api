@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    @user = User.find(session[:user_id])
     @posts = @user.posts.all
   end
 
@@ -29,6 +30,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    @user = User.find(session[:user_id])
     @post = @user.posts.new(post_params)
     if Post.last.present?
       next_id = Post.last.id + 1
