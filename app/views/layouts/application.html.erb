@@ -7,13 +7,10 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <meta name="viewport" content="width=device-width">
 
-    <% twitter_card = get_twitter_card_info(@post ? @post : nil) %>
+        <% twitter_card = get_twitter_card_info(@post ? @post : nil) %>
     <meta name="twitter:card" content=<%=twitter_card[:card]%> />
     <meta property="og:url" content=<%=twitter_card[:url]%> />
     <meta property="og:title" content=<%=twitter_card[:title]%> />
@@ -23,11 +20,16 @@
   </head>
 
   <body>
+
     <header>
       <%=render "shared/header"%>
     </header>
   <div class="container-md">
     <%= yield %>
   </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
 </html>
