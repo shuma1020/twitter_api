@@ -123,7 +123,7 @@ class PostsController < ApplicationController
           sentense += "\n" if n != i+1
         end
         # ⑨-4 文字サイズの指定
-        pointsize = 50
+        pointsize = 35
       elsif content.length <= 50 then
         n = (content.length / 10).floor + 1
         n.times do |i|
@@ -133,7 +133,7 @@ class PostsController < ApplicationController
           sentense += content.slice(range)
           sentense += "\n" if n != i+1
         end
-        pointsize = 60
+        pointsize = 40
       else
         n = (content.length / 15).floor + 1
         n.times do |i|
@@ -143,7 +143,7 @@ class PostsController < ApplicationController
           sentense += content.slice(range)
           sentense += "\n" if n != i+1
         end
-        pointsize = 45
+        pointsize = 40
       end
       # ⑨-5 文字色の指定
       color = "white"
@@ -183,7 +183,7 @@ class PostsController < ApplicationController
         i.font font
         i.fill 'white'
         i.gravity 'south'
-        i.pointsize 50
+        i.pointsize 40
         i.draw "text 0,200 '#{desire}'"
       end
 
