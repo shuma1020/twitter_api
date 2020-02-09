@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:new]
-
+  before_action :set_user
   before_action :login, only: [:index, :show, :new]
   before_action :correct_user, only: [:edit, :update, :confirm, :destroy]
 
@@ -9,7 +9,6 @@ class PostsController < ApplicationController
   end
 
   def index
-    @user = User.find(session[:user_id])
     @posts = @user.posts.all
   end
 
@@ -30,7 +29,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @user = User.find(session[:user_id])
     @post = @user.posts.new(post_params)
     if Post.last.present?
       next_id = Post.last.id + 1
@@ -83,7 +81,7 @@ class PostsController < ApplicationController
     def correct_user
       user = User.find(session[:user_id])
       post = Post.find(params[:id])
-      unless user.id == post.user_id
+      unless  user.id == post.user_id
         redirect_to root_path
       end
     end
