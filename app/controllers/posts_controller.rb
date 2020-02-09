@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:new]
   before_action :set_user
-  before_action :login_check, only: [:index, :show, :new]
+  before_action :login_check, only: [:index,:new]
   before_action :correct_user, only: [:edit, :update, :confirm, :destroy]
 
   def login
@@ -71,11 +71,7 @@ class PostsController < ApplicationController
 
     def login_check
       if session[:user_id].nil?
-        if params[:id]
-          @user = User.new(id:nil)
-        else
         redirect_to action:'login'
-        end
       else
         @user = User.find(session[:user_id])
       end
