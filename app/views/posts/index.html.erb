@@ -1,30 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="post">
+  <p id="notice"><%= notice %></p>
 
-<div class="your-posts">
-  <h4>あなたの投稿</h4>
-</div>
+  <div class="your-posts">
+    <h4>あなたの投稿</h4>
+  </div>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
+  <table>
+    <thead>
       <tr>
-        <td>
-          <%= link_to  post_path(post) do %>
-            <%=image_tag(post.picture, size: '400x250') %>
-          <% end %>
-        </td>
-        <td><%= link_to '編集する', edit_post_path(post) %></td>
-        <td><%= link_to '削除する', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr>
+          <td>
+            <%= link_to  post_path(post) do %>
+              <%=image_tag(post.picture, size: '400x250') %>
+            <% end %>
+          </td>
+          <td><%= link_to '編集する', edit_post_path(post) %></td>
+          <td><%= link_to '削除する', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+</div>
 

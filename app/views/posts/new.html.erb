@@ -1,14 +1,16 @@
-<div class= "what-is-iam">
-  <h2>I-AMとは</h2>
-  <p>I-AMは自分は何者かをTwitterでシェアし、今まで出会うことのなかった出会いを手助けするサービスです。<br>自分にあった働き方や職場がI-AMを通して通して発見できるかも知れません。</p>
-</div>
-<ul class="list-group">
-  <li class="list-group-item">
-    <%=link_to  "1.自分の特徴、希望条件を入力"%>
-  </li>
-  <li class="list-group-item">
-    <%=link_to  "2.Twitterでシェア"%>
-</ul>
+<div class="post">
+  <div class= "what-is-iam">
+    <h2>I-AMとは</h2>
+    <p>I-AMは自分は何者かをTwitterでシェアし、今まで出会うことのなかった出会いを手助けするサービスです。<br>自分にあった働き方や職場がI-AMを通して通して発見できるかも知れません。</p>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <%=link_to  "1.自分の特徴、希望条件を入力"%>
+    </li>
+    <li class="list-group-item">
+      <%=link_to  "2.Twitterでシェア"%>
+  </ul>
 
-<!-- 部分テンプレート -->
-<%= render 'form', post: @post %>
+  <!-- 部分テンプレート -->
+  <%= render 'form', post: @post %>
+</div>

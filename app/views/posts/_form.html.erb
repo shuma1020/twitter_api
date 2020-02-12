@@ -1,4 +1,4 @@
-<div class="post-form">
+<div class="post">
   <%= form_with(model: post, local: true) do |form| %>
     <% if post.errors.any? %>
       <div id="error_explanation">
@@ -35,7 +35,7 @@
       <div class="images">
         <div class="engineer">
           <%= form.label :kind, "エンジニア"%>
-          <%= form.radio_button :kind, "orange" %><%= image_tag 'orange.jpg', width: '100' %>
+          <%= form.radio_button :kind, "green" %><%= image_tag 'green.jpg', width: '100' %>
         </div>
         <div class="designer">
           <%= form.label :kind, "デザイナー"%>
