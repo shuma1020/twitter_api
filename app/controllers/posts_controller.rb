@@ -199,11 +199,11 @@ class PostsController < ApplicationController
     when "red" then
       base = Rails.root.join("app/assets/images/red.jpg")
     when "green" then
-      base = Rails.root.join("app/assets/images/green.jpeg")
+      base = Rails.root.join("app/assets/images/green.jpg")
     when "blue" then
-      base = Rails.root.join("app/assets/images/blue.jpeg")
+      base = Rails.root.join("app/assets/images/blue.jpg")
     else
-      base = Rails.root.join("app/assets/images/oudo.jpeg")
+      base = Rails.root.join("app/assets/images/oudo.jpg")
     end
 
     # ⑨-11 minimagickを使って選択した画像を開き、作成した文字を指定した条件通りに挿入している
