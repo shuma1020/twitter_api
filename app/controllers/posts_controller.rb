@@ -149,10 +149,10 @@ class PostsController < ApplicationController
     sentense_of_desire = ""
     if desire.length <= 28 then
       # ⑨-3 28文字以下の場合は7文字毎に改行
-      n = (desire.length / 30).floor + 1
+      n = (desire.length / 10).floor + 1
       n.times do |i|
-        s_num = i * 30
-        f_num = s_num + 29
+        s_num = i * 10
+        f_num = s_num + 9
         range =  Range.new(s_num,f_num)
         sentense_of_desire += desire.slice(range)
         sentense_of_desire += "\n" if n != i+1
