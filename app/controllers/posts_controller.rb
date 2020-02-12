@@ -220,7 +220,7 @@ class PostsController < ApplicationController
       i.font font
       i.fill 'white'
       i.gravity 'south'
-      i.pointsize 90
+      i.pointsize 70
       i.draw "text 0,480 '#{title}'"
     end
 
@@ -230,13 +230,6 @@ class PostsController < ApplicationController
       i.gravity 'center'
       i.pointsize fontsize
       i.draw "text 0,220 '#{sentense_of_desire}'"
-    end
-    image.combine_options do |i|
-      i.font font
-      i.fill 'white'
-      i.gravity 'south'
-      i.pointsize 40
-      i.draw "text -400,480 'タイトル'"
     end
 
 
