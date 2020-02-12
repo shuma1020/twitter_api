@@ -114,10 +114,10 @@ class PostsController < ApplicationController
     # ⑨-2 contentの文字数に応じて条件分岐
     if content.length <= 28 then
       # ⑨-3 28文字以下の場合は7文字毎に改行
-      n = (content.length / 30).floor + 1
+      n = (content.length / 20).floor + 1
       n.times do |i|
-        s_num = i * 30
-        f_num = s_num + 29
+        s_num = i * 20
+        f_num = s_num + 19
         range =  Range.new(s_num,f_num)
         sentense += content.slice(range)
         sentense += "\n" if n != i+1
@@ -125,20 +125,20 @@ class PostsController < ApplicationController
       # ⑨-4 文字サイズの指定
       pointsize = 60
     elsif content.length <= 50 then
-      n = (content.length / 30).floor + 1
+      n = (content.length / 20).floor + 1
       n.times do |i|
-        s_num = i * 30
-        f_num = s_num + 29
+        s_num = i * 20
+        f_num = s_num + 19
         range =  Range.new(s_num,f_num)
         sentense += content.slice(range)
         sentense += "\n" if n != i+1
       end
       pointsize = 55
     else
-      n = (content.length / 30).floor + 1
+      n = (content.length / 20).floor + 1
       n.times do |i|
-        s_num = i * 30
-        f_num = s_num + 29
+        s_num = i * 20
+        f_num = s_num + 19
         range =  Range.new(s_num,f_num)
         sentense += content.slice(range)
         sentense += "\n" if n != i+1
@@ -146,7 +146,7 @@ class PostsController < ApplicationController
       pointsize = 45
     end
 
-
+    sentense_of_desire = ""
     if desire.length <= 28 then
       # ⑨-3 28文字以下の場合は7文字毎に改行
       n = (desire.length / 30).floor + 1
@@ -154,31 +154,31 @@ class PostsController < ApplicationController
         s_num = i * 30
         f_num = s_num + 29
         range =  Range.new(s_num,f_num)
-        sentense += desire.slice(range)
-        sentense += "\n" if n != i+1
+        sentense_of_desire += desire.slice(range)
+        sentense_of_desire += "\n" if n != i+1
       end
       # ⑨-4 文字サイズの指定
-      fontsize = 70
+      fontsize = 60
     elsif desire.length <= 50 then
-      n = (desire.length / 30).floor + 1
+      n = (desire.length / 20).floor + 1
       n.times do |i|
-        s_num = i * 30
-        f_num = s_num + 29
+        s_num = i * 20
+        f_num = s_num + 19
         range =  Range.new(s_num,f_num)
-        sentense += desire.slice(range)
-        sentense += "\n" if n != i+1
+        sentense_of_desire += desire.slice(range)
+        sentense_of_desire += "\n" if n != i+1
       end
-      fontsize = 55
+      fontsize = 45
     else
       n = (desire.length / 30).floor + 1
       n.times do |i|
         s_num = i * 30
         f_num = s_num + 29
         range =  Range.new(s_num,f_num)
-        sentense += "\n"+desire.slice(range)
-        sentense += "\n" if n != i+1
+        sentense_of_desire += desire.slice(range)
+        sentense_of_desire += "\n" if n != i+1
       end
-      fontsize = 45
+      fontsize = 35
     end
 
 
@@ -213,11 +213,17 @@ class PostsController < ApplicationController
     image.combine_options do |i|
       i.font font
       i.fill 'white'
-      i.gravity 'south'
+      i.gravity 'center'
       i.pointsize fontsize
-      i.draw "text 0,100 '#{desire}'"
+      i.draw "text 0,220 '#{sentense_of_desire}'"
     end
-
+    image.combine_options do |i|
+      i.font font
+      i.fill 'white'
+      i.gravity 'south'
+      i.pointsize 40
+      p i.draw "text -400,480 'タイトル'"
+    end
 
 
 
