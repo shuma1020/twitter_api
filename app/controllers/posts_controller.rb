@@ -190,7 +190,21 @@ class PostsController < ApplicationController
     font = Rails.root.join('app').join('.fonts').join("GenEiGothicN-U-KL.otf")
     # ⑨-8 ↑これらの項目も文字サイズのように背景画像や文字数によって変えることができます
     # ⑨-9 選択された背景画像の設定
-    base = Rails.root.join("app").join("assets").join("images").join("red.jpg")
+
+
+    case @post.kind
+    when "orange" then
+      base = Rails.root.join("app/assets/images/orange.jpeg")
+    # ⑨-10 今回は選択されていない場合は"red"となるようにしている
+    when "red" then
+      base = Rails.root.join("app/assets/images/red.jpg")
+    when "green" then
+      base = Rails.root.join("app/assets/images/green.jpeg")
+    when "blue" then
+      base = Rails.root.join("app/assets/images/blue.jpeg")
+    else
+      base = Rails.root.join("app/assets/images/oudo.jpeg")
+    end
 
     # ⑨-11 minimagickを使って選択した画像を開き、作成した文字を指定した条件通りに挿入している
     image = MiniMagick::Image.open(base)
@@ -222,7 +236,7 @@ class PostsController < ApplicationController
       i.fill 'white'
       i.gravity 'south'
       i.pointsize 40
-      p i.draw "text -400,480 'タイトル'"
+      i.draw "text -400,480 'タイトル'"
     end
 
 

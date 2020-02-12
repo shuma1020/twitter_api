@@ -30,6 +30,33 @@
     <%= form.label :tag_list, 'タグをカンマ区切りで入力してみよう' %>
     <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
   </div>
+  <div class="form-group">
+    <p>背景画像選択</p>
+    <div class="background-engininere">
+      <%= form.label :kind, "エンジニア"%>
+      <%= form.radio_button :kind, "green" %><%= image_tag 'green.jpeg', width: '100' %>
+    </div>
+    <div>
+      <%= form.label :kind, "営業"%>
+      <%= form.radio_button :kind, "red" %><%= image_tag 'red.jpg', width: '100' %>
+    </div>
+    <div>
+      <%= form.label :kind, "企画"%>
+      <%= form.radio_button :kind, "orange" %><%= image_tag 'orange.jpeg', width: '100' %>
+    </div>
+
+    <div>
+      <%= form.label :kind, "マーケティング"%>
+      <%= form.radio_button :kind, "blue" %><%= image_tag 'blue.jpeg', width: '100' %>
+    </div>
+
+    <div>
+      <%= form.label :kind, "その他"%>
+      <%= form.radio_button :kind, "oudo" %><%= image_tag 'oudo.jpeg', width: '100' %>
+    </div>
+
+  </div>
+
   <div class="actions">
     <%= form.submit "Tweetする（まだツイートされません）", id: 'submit', class:"btn btn-outline-primary" %>
   </div>
