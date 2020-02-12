@@ -194,7 +194,7 @@ class PostsController < ApplicationController
 
     case @post.kind
     when "orange" then
-      base = Rails.root.join("app/assets/images/orange.jpeg")
+      base = Rails.root.join("app/assets/images/orange.jpg")
     # ⑨-10 今回は選択されていない場合は"red"となるようにしている
     when "red" then
       base = Rails.root.join("app/assets/images/red.jpg")
