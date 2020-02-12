@@ -4,9 +4,9 @@
       <div id="error_explanation">
         <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
         <ul>
-        <% post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+          <% post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
@@ -33,27 +33,30 @@
     <div class="form-group">
       <p>4.自分が希望する職業を選択してください</p>
       <div class="images">
-        <div class="engineer">
-          <%= form.label :kind, "エンジニア"%>
-          <%= form.radio_button :kind, "green" %><%= image_tag 'green.jpg', width: '100' %>
+        <div class="row 1st">
+          <div class="col-4 engineer">
+            <%= form.label :kind, "エンジニア"%>
+            <%= form.radio_button :kind, "green" %><%= image_tag 'green.jpg', width: '100' %>
+          </div>
+          <div class="col-4 designer">
+            <%= form.label :kind, "デザイナー"%>
+            <%= form.radio_button :kind, "red" %><%= image_tag 'red.jpg', width: '100' %>
+          </div>
+          <div class="col-4 coaching">
+            <%= form.label :kind, "コーチング"%>
+            <%= form.radio_button :kind, "orange" %><%= image_tag 'orange.jpg', width: '100' %>
+          </div>
         </div>
-        <div class="designer">
-          <%= form.label :kind, "デザイナー"%>
-          <%= form.radio_button :kind, "red" %><%= image_tag 'red.jpg', width: '100' %>
-        </div>
-        <div class="plannning">
-          <%= form.label :kind, "企画"%>
-          <%= form.radio_button :kind, "orange" %><%= image_tag 'orange.jpg', width: '100' %>
-        </div>
+        <div class="row 2st">
+          <div class="col-6 marketing">
+            <%= form.label :kind, "マーケティング"%>
+            <%= form.radio_button :kind, "blue" %><%= image_tag 'blue.jpg', width: '100' %>
+          </div>
 
-        <div class="marketing">
-          <%= form.label :kind, "マーケティング"%>
-          <%= form.radio_button :kind, "blue" %><%= image_tag 'blue.jpg', width: '100' %>
-        </div>
-
-        <div class="others">
-          <%= form.label :kind, "その他"%>
-          <%= form.radio_button :kind, "oudo" %><%= image_tag 'oudo.jpg', width: '100' %>
+          <div class="col-6 others">
+            <%= form.label :kind, "その他"%>
+            <%= form.radio_button :kind, "oudo" %><%= image_tag 'oudo.jpg', width: '100' %>
+          </div>
         </div>
       </div>
     </div>
