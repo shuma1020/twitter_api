@@ -13,6 +13,17 @@
  *= require_tree .
  *= require_self
  */
-.navbar.navbar-expand-lg.navbar-light.bg-light{
+.navbar.navbar-light.bg-light{
   margin-bottom: 12px;
+  display: flex;
+  justify-content: center;
+  a{
+    text-decoration: none;
+    margin-left: 24px;
+    &:hover{
+      background-color:#e8eaf6;
+      color: #9fa8da;
+    }
+
+  }
 }
