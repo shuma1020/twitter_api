@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :confirm, :destroy]
   before_action :new_post, only: [:new]
   before_action :set_user
-  before_action :login_check, only: [:index, :show, :new]
+  before_action :login_check, only: [:index,:new]
   before_action :correct_user, only: [:edit, :update, :confirm, :destroy]
 
   def login
@@ -71,11 +71,7 @@ class PostsController < ApplicationController
 
     def login_check
       if session[:user_id].nil?
-        if params[:id]
-          @user = User.new(id:nil)
-        else
         redirect_to action:'login'
-        end
       else
         @user = User.find(session[:user_id])
       end
@@ -111,59 +107,105 @@ class PostsController < ApplicationController
 
     def make_picture(id)
       sentense = ""
-      # ⑨-1 改行を消去
+    # ⑨-1 改行を消去
       content = @post.content.gsub(/\r\n|\r|\n/," ")
       title = @post.title.gsub(/\r\n|\r|\n/," ")
       desire = @post.desire.gsub(/\r\n|\r|\n/," ")
-      # ⑨-2 contentの文字数に応じて条件分岐
+    # ⑨-2 contentの文字数に応じて条件分岐
       if content.length <= 28 then
         # ⑨-3 28文字以下の場合は7文字毎に改行
-        n = (content.length / 7).floor + 1
+        n = (content.length / 20).floor + 1
         n.times do |i|
-          s_num = i * 7
-          f_num = s_num + 6
+          s_num = i * 20
+          f_num = s_num + 19
           range =  Range.new(s_num,f_num)
           sentense += content.slice(range)
           sentense += "\n" if n != i+1
         end
         # ⑨-4 文字サイズの指定
-        pointsize = 50
+        pointsize = 60
       elsif content.length <= 50 then
-        n = (content.length / 10).floor + 1
+        n = (content.length / 20).floor + 1
         n.times do |i|
-          s_num = i * 10
-          f_num = s_num + 9
+          s_num = i * 20
+          f_num = s_num + 19
           range =  Range.new(s_num,f_num)
           sentense += content.slice(range)
           sentense += "\n" if n != i+1
         end
-        pointsize = 60
+        pointsize = 55
       else
-        n = (content.length / 15).floor + 1
+        n = (content.length / 20).floor + 1
         n.times do |i|
-          s_num = i * 15
-          f_num = s_num + 14
+          s_num = i * 20
+          f_num = s_num + 19
           range =  Range.new(s_num,f_num)
           sentense += content.slice(range)
           sentense += "\n" if n != i+1
         end
         pointsize = 45
       end
-      # ⑨-5 文字色の指定
+
+      sentense_of_desire = ""
+      if desire.length <= 28 then
+        # ⑨-3 28文字以下の場合は7文字毎に改行
+        n = (desire.length / 10).floor + 1
+        n.times do |i|
+          s_num = i * 10
+          f_num = s_num + 9
+          range =  Range.new(s_num,f_num)
+          sentense_of_desire += desire.slice(range)
+          sentense_of_desire += "\n" if n != i+1
+        end
+        # ⑨-4 文字サイズの指定
+        fontsize = 60
+      elsif desire.length <= 50 then
+        n = (desire.length / 20).floor + 1
+        n.times do |i|
+          s_num = i * 20
+          f_num = s_num + 19
+          range =  Range.new(s_num,f_num)
+          sentense_of_desire += desire.slice(range)
+          sentense_of_desire += "\n" if n != i+1
+        end
+        fontsize = 45
+      else
+        n = (desire.length / 30).floor + 1
+        n.times do |i|
+          s_num = i * 30
+          f_num = s_num + 29
+          range =  Range.new(s_num,f_num)
+          sentense_of_desire += desire.slice(range)
+          sentense_of_desire += "\n" if n != i+1
+        end
+        fontsize = 35
+      end
+
+
+    # ⑨-5 文字色の指定
       color = "white"
       # ⑨-6 文字を入れる場所の調整（0,0を変えると文字の位置が変わります）
-      draw = "text 0,0 '#{content}'"
+      draw = "text 0,0 '#{sentense}'"
       # ⑨-7 フォントの指定
       font = Rails.root.join('app').join('.fonts').join("GenEiGothicN-U-KL.otf")
       # ⑨-8 ↑これらの項目も文字サイズのように背景画像や文字数によって変えることができます
       # ⑨-9 選択された背景画像の設定
+
+
       case @post.kind
-      when "black" then
-        base = "app/assets/images/black.jpg"
+      when "orange" then
+        base = Rails.root.join("app/assets/images/orange.jpg")
       # ⑨-10 今回は選択されていない場合は"red"となるようにしている
+      when "red" then
+        base = Rails.root.join("app/assets/images/red.jpg")
+      when "green" then
+        base = Rails.root.join("app/assets/images/green.jpg")
+      when "blue" then
+        base = Rails.root.join("app/assets/images/blue.jpg")
       else
-        base = Rails.root.join("app").join("assets").join("images").join("red.jpg")
+        base = Rails.root.join("app/assets/images/oudo.jpg")
       end
+
       # ⑨-11 minimagickを使って選択した画像を開き、作成した文字を指定した条件通りに挿入している
       image = MiniMagick::Image.open(base)
       image.combine_options do |i|
@@ -174,23 +216,21 @@ class PostsController < ApplicationController
         i.draw draw
       end
 
-
       image.combine_options do |i|
         i.font font
         i.fill 'white'
         i.gravity 'south'
-        i.pointsize 90
+        i.pointsize 70
         i.draw "text 0,480 '#{title}'"
       end
 
       image.combine_options do |i|
         i.font font
         i.fill 'white'
-        i.gravity 'south'
-        i.pointsize 50
-        i.draw "text 0,200 '#{desire}'"
+        i.gravity 'center'
+        i.pointsize fontsize
+        i.draw "text 0,220 '#{sentense_of_desire}'"
       end
-
 
 
 
