@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true)
     @users.each do |user|
-      p @posts = user.posts.where(kind: params[{"posts_kind_eq"=>"green"}])
+      @posts = user.posts.where(kind: params[{"posts_kind_eq"=>"green"}])
     end
   end
 
