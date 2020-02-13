@@ -1,0 +1,13 @@
+<div class="post">
+  <%= search_form_for(@q, url:search_posts_path) do |f| %>
+    <%= f.label :職業 %>
+　  <%= f.radio_button :posts_kind_eq, "green" %>エンジニア
+    <%= f.radio_button :posts_kind_eq, "orange" %>コーチ
+    <%= f.radio_button :posts_kind_eq, 2 %>女性
+
+    <%= f.submit "検索" %>
+  <% end %>
+  <% @users.each do |user| %>
+    <%= link_to user.name, "https://twitter.com/#{user.nickname}" %>
+  <% end %>
+</div>

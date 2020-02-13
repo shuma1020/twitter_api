@@ -10,7 +10,14 @@ class PostsController < ApplicationController
 
   def index
     @posts = @user.posts.all
-    @users = User.joins(:posts).where(posts: {kind:"green"})
+  end
+
+  def search
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true)
+    @users.each do |user|
+      p @posts = user.posts.where(kind: params[{"posts_kind_eq"=>"green"}])
+    end
   end
 
   # GET /posts/1
