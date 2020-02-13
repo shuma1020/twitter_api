@@ -10,6 +10,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = @user.posts.all
+    @users = User.joins(:posts).where(posts: {kind:"green"})
   end
 
   # GET /posts/1
