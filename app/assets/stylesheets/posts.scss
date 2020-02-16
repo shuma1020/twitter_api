@@ -79,9 +79,19 @@
         width: 50%;
         }
       }
-      .btn-primary{
-        margin-top: 12px;
+      .col-md-6{
+        margin-bottom: 12px;
       }
+
+      a{
+
+        display: flex;
+        justify-content: flex-end;
+        .btn-primary{
+          margin-top: 12px;
+        }
+      }
+
 
   }
 }
