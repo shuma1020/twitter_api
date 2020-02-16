@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+h1,h2,h3,h4,h5,p,span,li,a{
+  font-family: 'Sawarabi Gothic', sans-serif;
+}
 ul, li{
   list-style: none;
 }
@@ -28,5 +31,13 @@ ul, li{
       color: #9fa8da;
     }
 
+  }
+}
+
+.top{
+  text-align: center;
+  margin-top: 120px;
+  .sub_title{
+    font-size: 16px;
   }
 }
