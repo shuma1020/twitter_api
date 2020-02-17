@@ -7,11 +7,11 @@ module ApplicationHelper
         twitter_card[:image] = "https://s3-ap-northeast-1.amazonaws.com/i-am-production/images/#{post.id}.png"
       else
         twitter_card[:url] = 'https://iamrecruitme.herokuapp.com/'
-        twitter_card[:image] = Rails.root.join("app/assets/images/top.png")
+        twitter_card[:image] = Rails.root.join("app/assets/images/top.jpg")
       end
     else
       twitter_card[:url] = 'https://iamrecruitme.herokuapp.com/'
-      twitter_card[:image] = Rails.root.join("app/assets/images/top.png")
+      twitter_card[:image] = Rails.root.join("app/assets/images/top.jpg")
     end
     twitter_card[:title] = "Twitterで逆求人　I-AM"
     twitter_card[:card] = 'summary_large_image'
