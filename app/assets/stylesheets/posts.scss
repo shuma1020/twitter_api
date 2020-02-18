@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .post{
+
   .what-is-iam{
     margin: 24px 0 24px 0;
     h2{
@@ -83,12 +84,22 @@
         margin-bottom: 12px;
       }
 
-      a{
-
+      .card-bottom{
         display: flex;
         justify-content: flex-end;
-        .btn-primary{
-          margin-top: 12px;
+        a{
+          text-decoration: none;
+          &:hover{
+            background-color: transparent;
+          }
+        }
+
+        span{
+          color: #fff;
+        }
+
+        .my-gray{
+          color: #fff;
         }
       }
 

@@ -19,12 +19,15 @@
           <% end %>
         </div>
 
-        <%= link_to "https://twitter.com/#{user.nickname}" do %>
-          <button type="button" class="btn btn-primary">
-            <span>Twitterアカウントへ</span>
-            <i class="fab fa-twitter fa-2x my-gray"></i>
+        <div class="card-bottom">
+          <button type="button" class="btn btn-primary twitter">
+            <%= link_to "https://twitter.com/#{user.nickname}" do %>
+              <span>Twitterアカウントへ</span>
+              <i class="fab fa-twitter fa-2x my-gray"></i>
+            <% end %>
           </button>
-        <% end %>
+        </div>
+
       </li>
     </ul>
     <% end %>
