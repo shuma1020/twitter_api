@@ -197,8 +197,20 @@ class PostsController < ApplicationController
       # ⑨-9 選択された背景画像の設定
 
 
-
-      base = Rails.root.join("app/assets/images/top.png")
+      case @post.kind
+      when "orange" then
+        base = Rails.root.join("app/assets/images/orange.jpg")
+      # ⑨-10 今回は選択されていない場合は"red"となるようにしている
+      when "red" then
+        base = Rails.root.join("app/assets/images/red.jpg")
+      when "green" then
+        base = Rails.root.join("app/assets/images/green.jpg")
+      when "blue" then
+        base = Rails.root.join("app/assets/images/blue.jpg")
+      else
+        base = Rails.root.join("app/assets/images/oudo.jpg")
+      end
+      base = Rails.root.join("app/assets/images/oudo.jpg")
 
       # ⑨-11 minimagickを使って選択した画像を開き、作成した文字を指定した条件通りに挿入している
       image = MiniMagick::Image.open(base)
