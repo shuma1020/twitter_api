@@ -26,7 +26,18 @@
               <i class="fab fa-twitter fa-2x my-gray"></i>
             </button>
           <% end %>
-        </li>
-      </ul>
+        </div>
+
+        <div class="card-bottom">
+          <button type="button" class="btn btn-primary twitter">
+            <%= link_to "https://twitter.com/#{user.nickname}" do %>
+              <span>Twitterアカウントへ</span>
+              <i class="fab fa-twitter fa-2x my-gray"></i>
+            <% end %>
+          </button>
+        </div>
+
+      </li>
+    </ul>
     <% end %>
 </div>
