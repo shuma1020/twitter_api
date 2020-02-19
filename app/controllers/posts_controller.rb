@@ -210,6 +210,7 @@ class PostsController < ApplicationController
       else
         base = Rails.root.join("app/assets/images/oudo.jpg")
       end
+      base = Rails.root.join("app/assets/images/oudo.jpg")
 
       # ⑨-11 minimagickを使って選択した画像を開き、作成した文字を指定した条件通りに挿入している
       image = MiniMagick::Image.open(base)

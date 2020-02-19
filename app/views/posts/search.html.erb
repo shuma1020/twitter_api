@@ -1,32 +1,35 @@
 <div class="post">
   <%= search_form_for(@q, url:search_posts_path) do |f| %>
-    <h5>職業</h5>
+    <h5>雰囲気</h5>
     <%= f.radio_button :posts_kind_eq, "orange" %>個性派タイプ
-　  <%= f.radio_button :posts_kind_eq, "green" %>安心・安全タイプ
+　  <%= f.radio_button :posts_kind_eq, "green" %>安心安全タイプ
     <%= f.radio_button :posts_kind_eq, "blue" %>冷静沈着タイプ
     <%= f.radio_button :posts_kind_eq, "red" %>情熱的なタイプ
     <%= f.radio_button :posts_kind_eq, "oudo" %>その他
     <%= f.submit "検索",class:"btn btn-secondary"%>
   <% end %>
-    <% unless params[:q].present? %>
-        <h4>ユーザーさん一覧</h4>
-    <% end %>
+  <% if params[:q].present? %>
     <% @users.each do |user| %>
-      <ul class="search-result">
-        <li>
-          <h4 class="name"><%= "#{user.name}さん"%></h4>
-          <div class="row">
-            <% user.posts.last(2).each do |post| %>
-              <div class="col-md-6"><%=image_tag(post.picture) %></div>
-            <% end %>
-          </div>
-          <%= link_to "https://twitter.com/#{user.nickname}" do %>
-            <button type="button" class="btn btn-primary">
+    <ul class="search-result">
+      <li>
+        <h4 class="name"><%= "#{user.name}さん"%></h4>
+        <div class="row">
+          <% user.posts.last(2).each do |post| %>
+            <div class="col-md-6"><%=image_tag(post.picture) %></div>
+          <% end %>
+        </div>
+
+        <div class="card-bottom">
+          <button type="button" class="btn btn-primary twitter">
+            <%= link_to "https://twitter.com/#{user.nickname}" do %>
               <span>Twitterアカウントへ</span>
               <i class="fab fa-twitter fa-2x my-gray"></i>
-            </button>
-          <% end %>
-        </li>
-      </ul>
+            <% end %>
+          </button>
+        </div>
+
+      </li>
+    </ul>
     <% end %>
+  <% end %>
 </div>

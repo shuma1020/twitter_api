@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 .post{
+
   .what-is-iam{
     margin: 24px 0 24px 0;
-
     .title{
       text-align: center;
       margin: 100px 0;
@@ -23,6 +23,7 @@
       margin-bottom: 84px;
       line-height: 2em;
     }
+
   }
   .list-group{
     margin: 24px 0 24px 0 !important;
@@ -96,12 +97,22 @@
         margin-bottom: 12px;
       }
 
-      a{
-
+      .card-bottom{
         display: flex;
         justify-content: flex-end;
-        .btn-primary{
-          margin-top: 12px;
+        a{
+          text-decoration: none;
+          &:hover{
+            background-color: transparent;
+          }
+        }
+
+        span{
+          color: #fff;
+        }
+
+        .my-gray{
+          color: #fff;
         }
       }
   }

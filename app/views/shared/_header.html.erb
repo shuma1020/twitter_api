@@ -10,10 +10,10 @@
       </li>
     </ul>
   <% else %>
-    <%= link_to "ふんいき","#",  class:"navbar-brand" %>
+
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <%= link_to "TwitterでLogin" ,"/auth/twitter", method: :post %>
+        <h4 class=header-title><%= link_to "TwitterでLogin" ,"/auth/twitter", method: :post %></h4>
       </li>
     </ul>
   <% end %>
