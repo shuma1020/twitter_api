@@ -1,0 +1,22 @@
+.confirm{
+  .row{
+    margin-top: 44px;
+    a{
+      text-decoration: none;
+      background-color: transparent;
+    }
+    .col-md-4{
+      button{
+        margin-top: 24px;
+      }
+      ul{
+        margin-top: 24px;
+        padding-left: 0;
+      }
+      li{
+        margin-bottom: 24px;
+        font-size: 24px;
+      }
+    }
+  }
+}

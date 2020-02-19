@@ -1,22 +1,26 @@
-<% if @user.id == @post.user_id %>
-  <div class="row">
-    <div class="col-md-8">
-      <%= image_tag @post.picture, width: '315' %>
-    </div>
+<div class="confirm">
+  <% if @user.id == @post.user_id %>
+    <div class="row">
+      <div class="col-md-8">
+        <%= image_tag @post.picture, width: '315' %>
+      </div>
 
 
-    <div class="col-md-4">
-      <a href="https://twitter.com/share?url=https://iamrecruitme.herokuapp.com/posts/<%= @post.id %>&hashtags=ふんいき,<%=@post.tag_list %>" target="_blank" class="square_btn" data-show-count="false">
-        <button type="button" class="btn btn-primary">Twitter投稿へ</button>
-      </a>
-      <div>
-        <%= link_to "画像編集へ戻る", edit_post_path(@post) %>
-      </div>
-      <div>
-        <%= link_to "トップページへ", root_path %>
+      <div class="col-md-4">
+        <a href="https://twitter.com/share?url=https://iamrecruitme.herokuapp.com/posts/<%= @post.id %>&hashtags=ふんいき,<%=@post.tag_list %>" target="_blank" class="square_btn" data-show-count="false">
+          <button type="button" class="btn btn-primary">Twitter投稿へ</button>
+        </a>
+        <ul>
+          <li>
+            <%= link_to "画像編集へ戻る", edit_post_path(@post) %>
+          </li>
+          <li>
+            <%= link_to "トップページへ", root_path %>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
-<% else %>
-  <%= render "shared/error" %>
-<% end %>
+  <% else %>
+    <%= render "shared/error" %>
+  <% end %>
+</div>
