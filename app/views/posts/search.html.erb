@@ -1,6 +1,6 @@
 <div class="post">
   <%= search_form_for(@q, url:search_posts_path) do |f| %>
-    <h5>職業</h5>
+    <h5>雰囲気</h5>
     <%= f.radio_button :posts_kind_eq, "orange" %>個性派タイプ
 　  <%= f.radio_button :posts_kind_eq, "green" %>安心安全タイプ
     <%= f.radio_button :posts_kind_eq, "blue" %>冷静沈着タイプ
