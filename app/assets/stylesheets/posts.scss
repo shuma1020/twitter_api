@@ -4,11 +4,24 @@
 .post{
   .what-is-iam{
     margin: 24px 0 24px 0;
-    h2{
+
+    .title{
       text-align: center;
+      margin: 100px 0;
+      .hunniki{
+        font-size: 32px;
+        .is{
+          font-size: 16px;
+          vertical-align: baseline;
+        }
+      }
     }
-    p{
+
+    .explain{
       text-align: center;
+      font-size: 16px;
+      margin-bottom: 84px;
+      line-height: 2em;
     }
   }
   .list-group{
