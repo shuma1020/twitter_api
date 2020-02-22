@@ -8,7 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require('jquery')
-require ('demo_js.js')
+require ('packs/application.js')
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference
@@ -20,3 +20,34 @@ require ('demo_js.js')
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+
+$(function() {
+
+  //マウスを乗せたら発動
+  $('.header-title').mouseover(function() {
+
+    //マウスを乗せたら色が変わる
+    $(this).animate({fontSize : '36px'}, 500);
+
+  //ここにはマウスを離したときの動作を記述
+  }).mouseout(function() {
+
+    //アニメーションしながらテキストサイズが元のサイズに戻る
+    $(this).animate({fontSize : '24px'}, 500);
+
+  });
+
+  $("button").on("click", function() {
+    $(".popup")
+      .addClass("show")
+      .fadeIn();
+    // return false;
+  });
+
+  $("#close").on("click", function() {
+    $(".popup").fadeOut();
+    // return false;
+  });
+
+});
