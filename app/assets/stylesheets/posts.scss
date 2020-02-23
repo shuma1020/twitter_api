@@ -23,21 +23,33 @@
     position: fixed;
     top: 0;
     left: 0;
-    .content {
-    background-color:#fff;
-    padding: 30px;
-    width: 50%;
-    opacity: initial;
-  }
-  }
 
-  .show {
+  }
+  .content {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+    opacity: 0.8;
+    background-color:#000;
+    z-index: 10;
+  }
+
+  .list{
+    display: none;
+  }
 
   .list-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 20;
+    transform: translateY(-50%) translateX(-50%);
+  }
+  .group{
+    padding:0;
     margin: 24px 0 24px 0 !important;
     .list-group-item{
       &:hover{
@@ -77,6 +89,14 @@
     }
 
   }
+  .notice{
+    display: none;
+  }
+  .notice-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
   .index_image{
     img{
       width: 60%;

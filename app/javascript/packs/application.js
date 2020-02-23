@@ -40,14 +40,24 @@ $(function() {
 
   $("button").on("click", function() {
     $(".popup")
-      .addClass("show")
-      .fadeIn();
+      .toggleClass("content");
+
+      $(".list")
+      .toggleClass("list-group");
     // return false;
   });
 
   $("#close").on("click", function() {
-    $(".popup").fadeOut();
+    $(".content").fadeOut();
     // return false;
   });
+
+  //form-validation
+  $('form').validate({
+    rules: {
+      title: { required: true }
+    }
+});
+
 
 });
