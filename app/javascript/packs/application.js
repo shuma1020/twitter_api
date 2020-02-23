@@ -24,7 +24,6 @@ require ('packs/application.js')
 
 $(function() {
 
-  //マウスを乗せたら発動
   $('.header-title').mouseover(function() {
 
     //マウスを乗せたら色が変わる
@@ -53,11 +52,28 @@ $(function() {
   });
 
   //form-validation
-  $('form').validate({
-    rules: {
-      title: { required: true }
+  $('textarea.form-control').on('blur',function()
+  {
+    let error;
+    let value = $(this).val();
+    if(value == "")
+    {
+      error = true;
     }
-});
+    else if(!value.match(/[^\s\t]/))
+    {
+      error = true;
+    }
+
+    if(error)
+    {
+      $(".notice").addClass("notice-show").fadeIn();
+    }
+
+    $(".form-control").mouseover(function () {
+      $(".notice").fadeOut();
+    });
+  });
 
 
 });
