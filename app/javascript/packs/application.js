@@ -52,10 +52,9 @@ $(function() {
   });
 
   //form-validation
-  $('textarea.form-control').on('blur',function()
-  {
+  $('textarea.form-control').on('blur',function(){
     let error;
-    let value = $(this).val();
+    const value = $(this).val();
     if(value == "")
     {
       error = true;
@@ -64,16 +63,17 @@ $(function() {
     {
       error = true;
     }
-
     if(error)
     {
-      $(".notice").addClass("notice-show").fadeIn();
+      if(!$(this).nextAll('span.error-info').length){
+        $(this).after('<span class = "error-info">入力エラーです</span>');
+      }
     }
-
-    $(".form-control").mouseover(function () {
-      $(".notice").fadeOut();
-    });
+    else
+    {
+      if($(this).nextAll('span.error-info').length){
+        $(this).nextAll('span.error-info').remove();
+      }
+    }
   });
-
-
 });
