@@ -75,5 +75,20 @@ $(function() {
         $(this).nextAll('span.error-info').remove();
       }
     }
+
+    $("#post_title").on('blur', function () {
+      const value = $(this).val();
+      if (value.length >= 15) {
+        if (!$(this).nextAll('span.error-info').length) {
+          $(this).after('<span class = "error-info">文字数制限エラーです</span>');
+        }
+        }
+      else {
+        if ($(this).nextAll('span.error-info').length) {
+          $(this).nextAll('span.error-info').remove();
+        }
+      }
+
+    });
   });
 });
